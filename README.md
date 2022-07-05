@@ -1,2 +1,2 @@
 # EffictiveLife
-small scripts that really work
+small scripts that can really work
