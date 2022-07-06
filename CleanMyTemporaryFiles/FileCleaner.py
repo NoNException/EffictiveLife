@@ -1,4 +1,3 @@
-# 文件更显分拣程序，将文件按照更显时间分类
 import os
 import time
 from apscheduler.schedulers.background import BackgroundScheduler
