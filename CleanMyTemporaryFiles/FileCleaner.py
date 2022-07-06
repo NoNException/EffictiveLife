@@ -93,7 +93,6 @@ def _run_scheduler(file_dir):
     # 创建调度器
     schedule = BackgroundScheduler()
     schedule.start()
-    # 每天早上10点开始统计过期的文件，并提示清理
     schedule.add_job(_clean_files, trigger='cron', hour="10", minute="30", args=[file_dir])
     return schedule
 
