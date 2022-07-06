@@ -1,0 +1,53 @@
+
+This file lists modules PyInstaller was not able to find. This does not
+necessarily mean this module is required for running you program. Python and
+Python 3rd-party packages include a lot of conditional or optional modules. For
+example the module 'ntpath' only exists on Windows, whereas the module
+'posixpath' only exists on Posix systems.
+
+Types if import:
+* top-level: imported at the top-level - look at these first
+* conditional: imported within an if-statement
+* delayed: imported from within a function
+* optional: imported within a try-except-statement
+
+IMPORTANT: Do NOT post this list to the issue-tracker. Use it as a basis for
+           yourself tracking down the missing module. Thanks!
+
+missing module named winreg - imported by platform (delayed, optional), mimetypes (optional), urllib.request (delayed, conditional, optional)
+missing module named msvcrt - imported by subprocess (conditional), getpass (optional), test.support (delayed, conditional, optional), multiprocessing.spawn (delayed, conditional), multiprocessing.popen_spawn_win32 (top-level), asyncio.windows_events (top-level), asyncio.windows_utils (top-level), prompt_toolkit.input.win32 (conditional)
+missing module named 'org.python' - imported by copy (optional), xml.sax (delayed, conditional)
+missing module named 'java.lang' - imported by platform (delayed, optional), xml.sax._exceptions (conditional)
+missing module named _winapi - imported by encodings (delayed, conditional, optional), subprocess (conditional), multiprocessing.connection (optional), multiprocessing.reduction (conditional), multiprocessing.heap (conditional), multiprocessing.popen_spawn_win32 (top-level), asyncio.windows_events (top-level), asyncio.windows_utils (top-level)
+missing module named multiprocessing.BufferTooShort - imported by multiprocessing (top-level), multiprocessing.connection (top-level)
+missing module named multiprocessing.AuthenticationError - imported by multiprocessing (top-level), multiprocessing.connection (top-level)
+missing module named nt - imported by os (conditional, optional), ntpath (conditional, optional), shutil (conditional)
+missing module named _frozen_importlib_external - imported by importlib._bootstrap (delayed), importlib (optional), importlib.abc (optional)
+excluded module named _frozen_importlib - imported by importlib (optional), importlib.abc (optional)
+missing module named vms_lib - imported by platform (delayed, conditional, optional)
+missing module named java - imported by platform (delayed)
+missing module named _winreg - imported by platform (delayed, optional)
+missing module named org - imported by pickle (optional)
+missing module named multiprocessing.get_context - imported by multiprocessing (top-level), multiprocessing.pool (top-level), multiprocessing.managers (top-level), multiprocessing.sharedctypes (top-level)
+missing module named multiprocessing.TimeoutError - imported by multiprocessing (top-level), multiprocessing.pool (top-level)
+missing module named multiprocessing.set_start_method - imported by multiprocessing (top-level), multiprocessing.spawn (top-level)
+missing module named multiprocessing.get_start_method - imported by multiprocessing (top-level), multiprocessing.spawn (top-level)
+missing module named pyimod03_importers - imported by /Users/zongzi/opt/anaconda3/envs/pythonProject/lib/python3.7/site-packages/PyInstaller/hooks/rthooks/pyi_rth_pkgutil.py (top-level)
+missing module named prompt_toolkit.filters.is_searching - imported by prompt_toolkit.filters (top-level), prompt_toolkit.search (top-level), prompt_toolkit.key_binding.bindings.search (top-level), prompt_toolkit.key_binding.bindings.vi (top-level)
+missing module named 'prompt_toolkit.key_binding.key_bindings.vi' - imported by prompt_toolkit.key_binding.vi_state (conditional)
+missing module named prompt_toolkit.filters.vi_mode - imported by prompt_toolkit.filters (top-level), prompt_toolkit.document (top-level), prompt_toolkit.key_binding.bindings.page_navigation (top-level), prompt_toolkit.widgets.toolbars (top-level)
+missing module named prompt_toolkit.filters.has_completions - imported by prompt_toolkit.filters (top-level), prompt_toolkit.layout.menus (top-level), prompt_toolkit.widgets.toolbars (top-level), prompt_toolkit.widgets.dialogs (top-level)
+missing module named _overlapped - imported by asyncio.windows_events (top-level)
+missing module named asyncio.DefaultEventLoopPolicy - imported by asyncio (delayed, conditional), asyncio.events (delayed, conditional)
+missing module named backports - imported by wcwidth.wcwidth (optional)
+missing module named 'pygments.style' - imported by prompt_toolkit.styles.pygments (delayed)
+missing module named 'pygments.token' - imported by prompt_toolkit.styles.pygments (conditional), prompt_toolkit.formatted_text.pygments (conditional)
+missing module named pygments - imported by prompt_toolkit.styles.pygments (conditional)
+missing module named 'pygments.util' - imported by prompt_toolkit.lexers.pygments (delayed)
+missing module named 'pygments.lexers' - imported by prompt_toolkit.lexers.pygments (delayed)
+missing module named 'pygments.lexer' - imported by prompt_toolkit.lexers.pygments (conditional)
+missing module named prompt_toolkit.filters.vi_insert_multiple_mode - imported by prompt_toolkit.filters (top-level), prompt_toolkit.layout.processors (top-level)
+missing module named prompt_toolkit.filters.vi_insert_mode - imported by prompt_toolkit.filters (top-level), prompt_toolkit.layout.containers (top-level), prompt_toolkit.key_binding.bindings.basic (top-level)
+missing module named prompt_toolkit.filters.emacs_insert_mode - imported by prompt_toolkit.filters (top-level), prompt_toolkit.layout.containers (top-level), prompt_toolkit.key_binding.bindings.basic (top-level), prompt_toolkit.key_binding.bindings.emacs (top-level)
+missing module named prompt_toolkit.filters.is_done - imported by prompt_toolkit.filters (top-level), prompt_toolkit.layout.menus (top-level), prompt_toolkit.widgets.base (top-level), prompt_toolkit.shortcuts.progress_bar.base (top-level), prompt_toolkit.shortcuts.prompt (top-level)
+missing module named _typeshed - imported by prompt_toolkit.eventloop.inputhook (conditional)
