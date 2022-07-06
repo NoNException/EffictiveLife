@@ -9,7 +9,7 @@ MAX_FILE_EXIST_SECONDS = 7 * 24 * 60 * 60
 
 def _determine_level(access_timetime):
     """
-    根据文件的上一次的访问时间，将文件进行分类
+    check if file is overtime
     :param access_timetime: 文件的上一次的访问时间
     :return:  0 if day < MAX_FILE_EXIST_DAY else 1
     """
