@@ -95,7 +95,6 @@ def _run_scheduler(file_dir):
     schedule.start()
     # 每天早上10点开始统计过期的文件，并提示清理
     schedule.add_job(_clean_files, trigger='cron', hour="10", minute="30", args=[file_dir])
-    # schedule.add_job(_clean_files, trigger='cron', second="*/10", args=[file_dir])
     return schedule
 
 
