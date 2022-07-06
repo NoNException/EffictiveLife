@@ -8,9 +8,6 @@ CLEAN_RECORDS_FILENAME = '.file_to_clean'
 MAX_FILE_EXIST_SECONDS = 7 * 24 * 60 * 60
 
 
-# MAX_FILE_EXIST_SECONDS = 7 * 24 * 60 * 60
-
-
 def _determine_level(access_timetime):
     """
     根据文件的上一次的访问时间，将文件进行分类
