@@ -1,26 +1,26 @@
 import os
 import time
+import json
 from apscheduler.schedulers.background import BackgroundScheduler
 
 LEAST_FILE_NUMBER = 0
 CLEAN_RECORDS_FILENAME = '.file_to_clean'
-MAX_FILE_EXIST_SECONDS = 7 * 24 * 60 * 60
 
 
-def _determine_level(access_timetime):
+def _determine_level(access_timetime, max_seconds):
     """
     check if file is overtime
     :param access_timetime: 文件的上一次的访问时间
     :return:  0 if day < MAX_FILE_EXIST_DAY else 1
     """
     seconds = round((time.time() - int(access_timetime)), 2)
-    return 1 if seconds > MAX_FILE_EXIST_SECONDS else 0
+    return 1 if seconds > max_seconds else 0
 
 
-def _mark_file_wait_clean(file_dir):
+def _mark_file_wait_clean(file_dir, max_seconds):
     file_names = os.listdir(file_dir)
     # 获取文件最新的访问时间 os.stat(file_path) 计算文件的最新访问时间。
-    files_with_stat = [(a, _determine_level(os.stat(a).st_atime)) for a in ["{}/{}".format(file_dir, file_name) for file_name in file_names]]
+    files_with_stat = [(a, _determine_level(os.stat(a).st_atime, max_seconds)) for a in ["{}/{}".format(file_dir, file_name) for file_name in file_names]]
     files_wait_clean = [file for file in files_with_stat if file[1]]
     # 将等级4的文件的名称写入.files_to_clean文件内，每次都直接覆盖
     with open("{}/{}".format(file_dir, CLEAN_RECORDS_FILENAME), 'w') as clean_file:
@@ -35,11 +35,11 @@ def _notification(file_dir):
     # 如果没有文件超过最大时间，则不需要进行删除
     import applescript
     if LEAST_FILE_NUMBER == 0:
-        do_noting_dialog = """display dialog "No files needed to delete，Good Luck." buttons {"Fine"} default button {"Fine"} """
+        do_noting_dialog = 'display dialog "No files needed to delete at ' + file_dir + ' ，Good Luck." buttons {"Fine"} default button {"Fine"} '
         applescript.run(do_noting_dialog)
         return
     # 调用osascript脚本进行删除确认操作
-    delete_file_dialog = 'display dialog "Going to delete over time files, Counts:' + str(LEAST_FILE_NUMBER) + \
+    delete_file_dialog = 'display dialog "Going to delete over time files at ' + file_dir + ', Counts:' + str(LEAST_FILE_NUMBER) + \
                          '" buttons {"Don\'t Continue", "Continue","Check Files"} default button {"Check Files"} cancel button {"Don\'t Continue"}'
     res = applescript.run(delete_file_dialog)
     # 如果脚本运行失败，发送通知
@@ -67,7 +67,7 @@ def _notification(file_dir):
                     continue
                 else:
                     success_delete_count += 1
-            delete_success_notice = 'display notification "Delete files (Count:{}) Success"'.format(str(success_delete_count))
+            delete_success_notice = 'display notification "Delete files at:{} (Count:{}) Success"'.format(file_dir, str(success_delete_count))
             applescript.run(delete_success_notice)
     if res.out == 'button returned:Check Files':
         # 检查文件，打开即将删除的文件列表
@@ -79,29 +79,38 @@ def _notification(file_dir):
                 tell first session of current tab of current window
                     write text "cat {}/{}"
                 end tell
-            end tell""".format(work_dir, CLEAN_RECORDS_FILENAME)
+            end tell""".format(file_dir, CLEAN_RECORDS_FILENAME)
         applescript.run(check_files)
         _notification(file_dir)
 
 
-def _clean_files(file_dir):
-    _mark_file_wait_clean(file_dir)
+def _clean_files(file_dir, max_seconds):
+    _mark_file_wait_clean(file_dir, max_seconds)
     _notification(file_dir)
 
 
-def _run_scheduler(file_dir):
+def _run_scheduler(schedule, config):
     # 创建调度器
-    schedule = BackgroundScheduler()
-    schedule.start()
-    schedule.add_job(_clean_files, trigger='cron', hour="10", minute="30", args=[file_dir])
-    return schedule
+    file_dir = config['dir']
+    max_seconds = config['max_seconds']
+    schedule.add_job(id=file_dir, func=_clean_files, trigger='cron', hour="10", minute="30", args=[file_dir, max_seconds])
+
+
+def _load_config(config_file_name):
+    with open(config_file_name, 'r') as config_file:
+        data = json.load(config_file)
+        return data
 
 
 if __name__ == '__main__':
-    work_dir = '/Users/zongzi/Desktop/temporary'
-    sche = _run_scheduler(work_dir)
-    try:
-        while True:
-            time.sleep(2)
-    except(KeyboardInterrupt, SystemExit):
-        sche.shutdown()
+    configs = _load_config(".file_cleaner")
+    if configs:
+        sche = BackgroundScheduler()
+        sche.start()
+        try:
+            for work_dir_config in configs['work_spaces']:
+                _run_scheduler(sche, work_dir_config)
+            while True:
+                time.sleep(60)
+        except(KeyboardInterrupt, SystemExit):
+            sche.shutdown()
