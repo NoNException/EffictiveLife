@@ -93,7 +93,7 @@ def _run_scheduler(schedule, config):
     # 创建调度器
     file_dir = config['dir']
     max_seconds = config['max_seconds']
-    schedule.add_job(id=file_dir, func=_clean_files, trigger='cron', hour="10", minute="30", args=[file_dir, max_seconds])
+    schedule.add_job(id=file_dir, func=_clean_files, trigger='cron', hour="14", minute="30", args=[file_dir, max_seconds])
 
 
 def _load_config(config_file_name):
