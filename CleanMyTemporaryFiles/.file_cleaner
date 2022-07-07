@@ -1,0 +1,9 @@
+{
+    "work_spaces":[
+        {"dir":"/Users/zongzi/Desktop/temporary","max_seconds":604880},
+        {"dir":"/Users/zongzi/Downloads/QQ下载","max_seconds":604880},
+        {"dir":"/Users/zongzi/Downloads/微信下载","max_seconds":604880},
+        {"dir":"/Users/zongzi/Downloads/web下载","max_seconds":604880},
+        {"dir":"/Users/zongzi/Downloads/钉钉下载","max_seconds":604880}
+    ]
+}
