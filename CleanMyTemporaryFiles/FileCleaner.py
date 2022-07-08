@@ -35,8 +35,7 @@ def _notification(file_dir):
     # 如果没有文件超过最大时间，则不需要进行删除
     import applescript
     if LEAST_FILE_NUMBER == 0:
-        do_noting_dialog = 'display dialog "No files needed to delete at ' + file_dir + ' ，Good Luck." buttons {"Fine"} default button {"Fine"} '
-        applescript.run(do_noting_dialog)
+        # nothing to delete return
         return
     # 调用osascript脚本进行删除确认操作
     delete_file_dialog = 'display dialog "Going to delete over time files at ' + file_dir + ', Counts:' + str(LEAST_FILE_NUMBER) + \

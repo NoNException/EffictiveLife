@@ -4,4 +4,21 @@
 - 两周之内
 - 超过两周
 
-并且在每周的第1和3个周一，用通知的形式提示我删除超过两周的文件。
+并且在每天的下午2点半，提示我对这几个文件的检查结果。如果我确认删除文件，这些文件就会被移动到废纸篓。
+
+配置文件样式: 文件名`.file_cleaner`
+```json
+{
+      "work_spaces":[
+        {"dir":"/the/directory/you/want/to/be/cleaned","max_seconds":604880}
+      ]
+}
+```
+运行脚本，在后台运行
+```shell 
+nohub python FileCleaner.py & 
+```
+运行脚本之后，在程序第一次运行的时候，在你指定的文件夹下，会产生一个文件`.file_to_clean`，其中记录着，将要被删除的文件。
+### tips:
+
+本脚本只能在Mac OS的环境下运行。因为大多数的交互过程都是通过`osascript`实现的
