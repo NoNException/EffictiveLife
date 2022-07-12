@@ -39,12 +39,12 @@ if __name__ == '__main__':
     words_dic.remove(attr_char)
     print_formatted_text("中心词:{}, 词性:{}".format(word, attr_char))
     start_time = time.time()
-    result = []
+    input_stack = []
     for i in range(0, 8):
         worlds = prompt("第{}个{}词:".format(i + 1, words_dic[0]))
-        result.append(worlds)
+        input_stack.append(worlds)
     time_costs = round(time.time() - start_time, 2)
     print("耗时:{}s".format(time_costs, 2))
-    print(result)
-    save_worlds(result, abs(attrs - 1), index)
+    print(input_stack)
+    save_worlds(input_stack, abs(attrs - 1), index)
     records_log(word, time_costs)
